@@ -1,0 +1,31 @@
+{
+  "name": "roboweek-1a-edicao",
+  "version": "1.0.0",
+  "description": "roboweek",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sejaninja/roboweek-1a-edicao.git"
+  },
+  "keywords": [
+    "automacao",
+    "python",
+    "nodejs"
+  ],
+  "author": "Aline Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sejaninja/roboweek-1a-edicao/issues"
+  },
+  "homepage": "https://github.com/sejaninja/roboweek-1a-edicao#readme",
+  "devDependencies": {
+    "chromedriver": "^80.0.1"
+  }
+}

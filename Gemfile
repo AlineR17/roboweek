@@ -9,6 +9,8 @@ gem 'tzinfo-data'
 
 gem 'rails-i18n', '~> 5.0.0'
 
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
 # Style
 gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'font-awesome-sass'
