@@ -13,27 +13,44 @@ Test Teardown   Depois do teste
 
 
 Cadastrar novo jogo
-        [tags]  smoke
-        Dado que acesso o portal de cadastro de jogos
-        Quando eu faço o cadastro de um novo jogo
+        [tags]          smoke
+        Dado que eu tenho o seguinte produto
         ...     Pitfal      Aventura na selva           19.99           10
+        E acesso o portal de cadastro de jogos
+        Quando eu faço o cadastro desse item
         Então vejo a mensagem de sucesso "Produto cadastrado com sucesso."
         E vejo este novo jogo na lista
 
-Nome deve ser obrigatorio
-        Dado que acesso o portal de cadastro de jogos
-        Quando eu faço o cadastro de um novo jogo
-        ...     ${EMPTY}      Aventura na selva           19.99           10
-        Então devo ver a mensagem de alerta "Nome não pode ficar em branco"
+Jogo não pode ser duplicado
+        [tags]  dup
+        Dado que eu tenho o seguinte produto
+        ...     Enduro      Clássico de corrida           29.99           15
+        E acesso o portal de cadastro de jogos
+        Mas este produto já foi cadastrado
+        E acesso o portal de cadastro de jogos
+        Quando eu faço o cadastro desse item
+        Então devo ver a mensagem de alerta "Nome já está em uso"
 
+Nome deve ser obrigatorio
+        [Template]      Tentar cadastrar
+        ${EMPTY}        19.99           10              Nome não pode ficar em branco
+        
 Preço deve ser obrigatorio
-        Dado que acesso o portal de cadastro de jogos
-        Quando eu faço o cadastro de um novo jogo
-        ...     Pitfal      Aventura na selva           ${EMPTY}           10
-        Então devo ver a mensagem de alerta "Preco não pode ficar em branco"
+        [tags]          bug
+        [Template]      Tentar cadastrar
+        Pitfal          ${EMPTY}        10              Preço não pode ficar em branco
 
 Quantidade deve ser obrigatoria
-        Dado que acesso o portal de cadastro de jogos
-        Quando eu faço o cadastro de um novo jogo
-        ...     Pitfal      Aventura na selva           19.99           ${EMPTY}
-        Então devo ver a mensagem de alerta "Quantidade não pode ficar em branco"
+        [Template]      Tentar cadastrar
+        Pitfal          19.99           ${EMPTY}        Quantidade não pode ficar em branco
+        
+
+*** Keywords ***
+Tentar cadastrar
+        [Arguments]             ${nome}         ${preco}        ${qtd}          ${texto}
+
+        Dado que eu tenho o seguinte produto
+        ...     ${nome}      Aventura na selva           ${preco}           ${qtd}
+        E acesso o portal de cadastro de jogos
+        Quando eu faço o cadastro desse item
+        Então devo ver a mensagem de alerta "${texto}"
